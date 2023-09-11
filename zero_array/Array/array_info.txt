@@ -1,6 +1,0 @@
------ Homework for DBMS(zero task) -----
---- My custom array class can insert --- 
---- elements(with resize of array);  ---
---- search min, max element; sort(2);---
---- make basic math operations,      ---
---- please reviev my homework        ---
