@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
 /**
  * @brief Create array.
  * @param size - size of your array
@@ -38,7 +36,7 @@ int get_min_element_of_array(int* array, const size_t size);
  * @param array - your "raw" array
  * @param size - size of your array
 */
-string to_string_array(int* array, const size_t size);
+std::string to_string_array(int* array, const size_t size);
 
 /**
  * @brief Used to input array size(catch execept if bad).
@@ -52,23 +50,23 @@ size_t check_array_size(int size);
 int main() {
 
 	int unchecked_size;
-	cout << "Input array size ";
-	cin >> unchecked_size;
+	std::cout << "Input array size ";
+	std::cin >> unchecked_size;
 	size_t size = check_array_size(unchecked_size);
 
 	int* example_array = new int[size];
 
 	example_array = input_array(size);
 
-	cout << to_string_array(example_array, size) << "\n";
+	std::cout << to_string_array(example_array, size) << "\n";
 
-	cout << "Max element: " << get_max_element_of_array(example_array, size) << "\n";
+	std::cout << "Max element: " << get_max_element_of_array(example_array, size) << "\n";
 
-	cout << "Min element: " << get_min_element_of_array(example_array, size) << "\n";
+	std::cout << "Min element: " << get_min_element_of_array(example_array, size) << "\n";
 
 	sort_bubble(example_array, size);
 
-	cout << to_string_array(example_array, size) << "\n";
+	std::cout << to_string_array(example_array, size) << "\n";
 
 	if (example_array != nullptr) {
 		delete[] example_array;
@@ -80,9 +78,9 @@ int main() {
 
 int* input_array(const size_t size) {
 	int* array = new int[size];
-	cout << "Input array data(int type)\n";
+	std::cout << "Input array data(int type)\n";
 	for (size_t index = 0; index < size; index++)
-		cin >> array[index];
+		std::cin >> array[index];
 	return array;
 }
 
@@ -116,16 +114,16 @@ int get_min_element_of_array(int* array, const size_t size) {
 	return min_element;
 }
 
-string to_string_array(int* array, const size_t size) {
-	string out;
+std::string to_string_array(int* array, const size_t size) {
+	std::string out;
 	for (size_t i = 0; i < size; i++) 
-		out += to_string(array[i]);
+		out += std::to_string(array[i]);
 	return out;
 }
 
 size_t check_array_size(int size) {
 	if (size <= 0) {
-		cout << "You entered wrong size!\n";
+		std::cout << "You entered wrong size!\n";
 		throw std::out_of_range(" Error!");
 	}
 	return (size_t)size;
