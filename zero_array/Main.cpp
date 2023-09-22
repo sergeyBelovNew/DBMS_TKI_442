@@ -3,14 +3,11 @@
 
 using namespace std;
 
-/*----- Prototyping procedures -----*/
-
 /**
  * @brief Create array.
  * @param size - size of your array
  * @return array(fill).
 */
-
 int* input_array(const size_t size);
 
 /**
@@ -18,7 +15,6 @@ int* input_array(const size_t size);
  * @param array - your "raw" array
  * @param size - size of your array
 */
-
 void sort_bubble(int* array, const size_t size);
 
 /**
@@ -27,7 +23,6 @@ void sort_bubble(int* array, const size_t size);
  * @param size - size of your array
  * @return max element of array.
 */
-
 int get_max_element_of_array(int* array, const size_t size);
 
 /**
@@ -36,7 +31,6 @@ int get_max_element_of_array(int* array, const size_t size);
  * @param size - size of your array
  * @return min element of array.
 */
-
 int get_min_element_of_array(int* array, const size_t size);
 
 /**
@@ -44,23 +38,23 @@ int get_min_element_of_array(int* array, const size_t size);
  * @param array - your "raw" array
  * @param size - size of your array
 */
-
 string to_string_array(int* array, const size_t size);
+
+/**
+ * @brief Used to input array size(catch execept if bad).
+ * @param size - size of your array
+*/
+size_t check_array_size(int size);
 
 /**
  * @brief for see output of sorting, find max, min elements of array and custom func for output array.
 */
-
 int main() {
-	int size;
 
+	int unchecked_size;
 	cout << "Input array size ";
-	cin >> size;
-
-	if (size <= 0) {
-		cout << "You entered wrong size!\n";
-		throw std::out_of_range(" Error!");
-	}
+	cin >> unchecked_size;
+	size_t size = check_array_size(unchecked_size);
 
 	int* example_array = new int[size];
 
@@ -83,8 +77,6 @@ int main() {
 
 	return 0;
 }
-
-/* ----- Realization procedures ----- */
 
 int* input_array(const size_t size) {
 	int* array = new int[size];
@@ -129,4 +121,12 @@ string to_string_array(int* array, const size_t size) {
 	for (size_t i = 0; i < size; i++) 
 		out += to_string(array[i]);
 	return out;
+}
+
+size_t check_array_size(int size) {
+	if (size <= 0) {
+		cout << "You entered wrong size!\n";
+		throw std::out_of_range(" Error!");
+	}
+	return (size_t)size;
 }
