@@ -41,8 +41,8 @@ namespace tree
 	*/
 	Node::~Node()
 	{
-		this->left = nullptr;
-		this->right = nullptr;
+		delete this->left;
+		delete this->right;
 	}
 
 	/*
