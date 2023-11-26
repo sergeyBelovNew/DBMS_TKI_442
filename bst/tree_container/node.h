@@ -51,8 +51,8 @@ namespace tree {
 		*/
 		bool is_root() const noexcept;
 		/**
-		 * @brief Проверка на то, является ли узел листом.
-		 * @return true/false является/не является.
+		 * @brief list check
+		 * @return true/false is leaf or not
 		*/
 		bool is_leaf() const noexcept;
 
