@@ -1,28 +1,100 @@
 #pragma once
-#include <ostream>
+#include <iostream>
 #include <sstream>
-#include <utility>
 
-namespace  tree 
-{
-	struct  Node 
-	{
-		Node();
-		Node(const int value);
-		Node(const Node& node);
-		Node(const Node&& other) noexcept : data(std::move(other.data)) {};
-		~Node();
-
-		friend bool operator==(const Node& lha, const Node& rha);
-		friend bool operator<(const Node& lha, const Node& rha); // Visual studio doesnt seen operator<=>, so I use standart <
-		friend bool operator>(const Node& lha, const Node& rha); // Visual studio doesnt seen operator<=>, so I use standart >
-
-		int get_height_save(); // for situation when left or right node doesnt exist (avl tree)
-
+namespace tree {
+	/**
+	* @brief Structure node, for implematation of BST
+	*/
+	struct Node {
+		/**
+		* @brief value
+		*/
 		int data;
-		int height; // using in avl tree
+		/**
+		* @brief pointer on parent node
+		*/
+		Node* parent;
+		/**
+		* @brief pointer on left node
+		*/
 		Node* left;
+		/**
+		* @brief pointer on right node
+		*/
 		Node* right;
+		/**
+		 * @brief Constructor with param
+		 * @param value - value of inserted node
+		*/
+		Node(const int& value);
+		Node(const Node& node) = delete;
+		Node& operator =(const Node& node) = delete;
+		/**
+		 * @brief Move constructor
+		 * @param node
+		*/
+		Node(Node&& node) noexcept = default;
+		/**
+		 * @brief Move operator
+		 * @param node
+		*/
+		Node& operator =(Node&& node) noexcept = default;
+		/**
+		 * @brief Destrucor.
+		*/
+		~Node();
+		
+		/**
+		 * @brief Method for get info is current node root
+		 * @return true/false root/not root
+		*/
+		bool is_root() const noexcept;
+		/**
+		 * @brief Проверка на то, является ли узел листом.
+		 * @return true/false является/не является.
+		*/
+		bool is_leaf() const noexcept;
+
+		/**
+		 * @brief Operator to comparison 
+		 * @param left - left node.
+		 * @param right - right node, with that we compare
+		 * @return result of comparison
+		*/
+		friend auto operator <=>(const Node& l, const Node& r) {
+			if (std::less<int>()(l.data, r.data)) {
+				return -1;
+			}
+
+			if (std::greater<int>()(l.data, r.data)) {
+				return 1;
+			}
+
+			return 0;
+		}
+
+		/**
+		 * @brief Operator to comparison
+		 * @param left - left node.
+		 * @param right - right node, with that we compare
+		 * @return result of comparison
+		*/
+		friend bool operator ==(const Node& l, const Node& r) {
+			return operator<=>(l, r) == 0;
+		}
+
+		/**
+		 * @brief Operator for output node
+		 * @param stream - input stream
+		 * @param node, that we output
+		 * @return output stream
+		*/
+		friend std::ostream& operator<<(std::ostream& stream, const Node& node) {
+			std::ostringstream buffer{};
+			buffer << node.data;
+			stream << buffer.str();
+			return stream;
+		};
 	};
 }
-
