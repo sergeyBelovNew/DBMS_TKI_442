@@ -51,7 +51,7 @@ namespace tree {
 		*/
 		bool is_root() const noexcept;
 		/**
-		 * @brief list check
+		 * @brief leaf check
 		 * @return true/false is leaf or not
 		*/
 		bool is_leaf() const noexcept;
