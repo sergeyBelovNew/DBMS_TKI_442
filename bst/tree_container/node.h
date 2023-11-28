@@ -30,16 +30,19 @@ namespace tree {
 		Node(const int& value);
 		Node(const Node& node) = delete;
 		Node& operator =(const Node& node) = delete;
+		
 		/**
 		 * @brief Move constructor
 		 * @param node
 		*/
 		Node(Node&& node) noexcept = default;
+		
 		/**
 		 * @brief Move operator
 		 * @param node
 		*/
 		Node& operator =(Node&& node) noexcept = default;
+
 		/**
 		 * @brief Destrucor.
 		*/
@@ -82,6 +85,16 @@ namespace tree {
 		*/
 		friend bool operator ==(const Node& l, const Node& r) {
 			return operator<=>(l, r) == 0;
+		}
+
+		/**
+		 * @brief Operator not equel
+		 * @param left - left node.
+		 * @param right - right node, with that we compare
+		 * @return result of comparison
+		*/
+		friend bool operator !=(const Node& l, const Node& r) {
+			return operator<=>(l, r) != 0;
 		}
 
 		/**

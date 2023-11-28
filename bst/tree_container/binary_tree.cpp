@@ -152,10 +152,6 @@ namespace tree {
 				}
 			}
 
-			if (current != nullptr) {
-				throw std::logic_error("Node with this data value already exist");
-			}
-
 			if (*new_node < *parent) {
 				parent->left = new_node;
 			}
@@ -226,7 +222,7 @@ namespace tree {
 		return true;
 	}
 
-	bool BinaryTree::has_value(const int& value) const noexcept {
+	bool BinaryTree::has_value(const int value) const noexcept {
 		return this->find_by_value(this->root, value) != nullptr;
 	}
 

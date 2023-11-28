@@ -60,7 +60,7 @@ namespace tree {
 		 * @param value - value of node.
 		 * @return true/false result of working method(sussess or fail)
 		*/
-		bool has_value(const int& value) const noexcept;
+		bool has_value(const int value) const noexcept;
 		/**
 		 * @brief Method for check exist tree or not(exist root or not)
 		 * @return true/false result of working method(sussess or fail)
