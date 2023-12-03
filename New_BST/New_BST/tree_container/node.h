@@ -6,42 +6,43 @@ namespace tree {
 	/**
 	* @brief Structure node, for implematation of BST
 	*/
+	template <typename T>
 	struct Node {
 		/**
 		* @brief value
 		*/
-		int data;
+		T data;
 		/**
 		* @brief pointer on parent node
 		*/
-		Node* parent;
+		Node<T>* parent;
 		/**
 		* @brief pointer on left node
 		*/
-		Node* left;
+		Node<T>* left;
 		/**
 		* @brief pointer on right node
 		*/
-		Node* right;
+		Node<T>* right;
 		/**
 		 * @brief Constructor with param
 		 * @param value - value of inserted node
 		*/
-		Node(const int& value);
-		Node(const Node& node) = delete;
-		Node& operator =(const Node& node) = delete;
+		Node(const T& value);
+		Node(const Node<T>& node) = delete;
+		Node& operator =(const Node<T>& node) = delete;
 		
 		/**
 		 * @brief Move constructor
 		 * @param node
 		*/
-		Node(Node&& node) noexcept = default;
+		Node(Node<T>&& node) noexcept = default;
 		
 		/**
 		 * @brief Move operator
 		 * @param node
 		*/
-		Node& operator =(Node&& node) noexcept = default;
+		Node<T>& operator =(Node<T>&& node) noexcept = default;
 
 		/**
 		 * @brief Destrucor.
@@ -65,7 +66,7 @@ namespace tree {
 		 * @param right - right node, with that we compare
 		 * @return result of comparison
 		*/
-		friend auto operator <=>(const Node& l, const Node& r) {
+		friend auto operator <=>(const Node<T>& l, const Node<T>& r) {
 			if (std::less<int>()(l.data, r.data)) {
 				return -1;
 			}
@@ -83,7 +84,7 @@ namespace tree {
 		 * @param right - right node, with that we compare
 		 * @return result of comparison
 		*/
-		friend bool operator ==(const Node& l, const Node& r) {
+		friend bool operator ==(const Node<T>& l, const Node<T>& r) {
 			return operator<=>(l, r) == 0;
 		}
 
@@ -93,7 +94,7 @@ namespace tree {
 		 * @param right - right node, with that we compare
 		 * @return result of comparison
 		*/
-		friend bool operator !=(const Node& l, const Node& r) {
+		friend bool operator !=(const Node<T>& l, const Node<T>& r) {
 			return operator<=>(l, r) != 0;
 		}
 
@@ -103,11 +104,41 @@ namespace tree {
 		 * @param node, that we output
 		 * @return output stream
 		*/
-		friend std::ostream& operator<<(std::ostream& stream, const Node& node) {
+		friend std::ostream& operator<<(std::ostream& stream, const Node<T>& node) {
 			std::ostringstream buffer{};
 			buffer << node.data;
 			stream << buffer.str();
 			return stream;
 		};
 	};
+
+	template <typename T>
+	Node<T>::Node(const T& value) : data{ value }, parent{ nullptr }, left{ nullptr }, right{ nullptr } {}
+	
+	template <typename T>
+	Node<T>::~Node() {
+		if (!this->is_root()) {
+			if (this == this->parent->left) {
+				this->parent->left = nullptr;
+			}
+			else {
+				this->parent->right = nullptr;
+			}
+
+			this->parent = nullptr;
+		}
+
+		this->left = nullptr;
+		this->right = nullptr;
+	}
+
+	template <typename T>
+	bool Node<T>::is_root() const noexcept {
+		return this->parent == nullptr;
+	}
+
+	template <typename T>
+	bool Node<T>::is_leaf() const noexcept {
+		return this->left == nullptr && this->right == nullptr;
+	}
 }
