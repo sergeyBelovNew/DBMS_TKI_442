@@ -2,7 +2,7 @@
 #include <list>
 #include "CppUnitTest.h"
 
-#include "../New_BST/tree_container/binary_tree.h"
+#include "../DBMS_FINAL/New_BST/tree_container/binary_tree.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -56,7 +56,7 @@ namespace Test
 			Assert::IsTrue(tree);
 		}
 
-		TEST_METHOD(HAS_VALUE_SUCCESS)
+		TEST_METHOD(HAS_INT_VALUE_SUCCESS)
 		{
 			//Arrange
 			std::initializer_list<int> list{ 1, 5, 9 };
@@ -70,7 +70,7 @@ namespace Test
 			Assert::AreEqual(expected, actual);
 			Assert::IsTrue(actual);
 		}
-		TEST_METHOD(ADD_NODE_SUCCESS)
+		TEST_METHOD(ADD_INT_NODE_SUCCESS)
 		{
 			//Arrange
 			auto tree = new tree::BinaryTree<int>();
@@ -85,7 +85,7 @@ namespace Test
 			Assert::IsTrue(added);
 		}
 
-		TEST_METHOD(REMOVE_NODE_SUCCESS)
+		TEST_METHOD(REMOVE_INT_NODE_SUCCESS)
 		{
 			//Arrange
 			std::initializer_list<int> list{ 1, 5 };
@@ -95,6 +95,51 @@ namespace Test
 			//Act
 			auto remove = tree->remove_node(5);
 			auto actual = tree->has_value(5);
+
+			//Assert
+			Assert::AreEqual(expected, actual);
+			Assert::IsTrue(remove);
+		}
+
+		TEST_METHOD(HAS_DOUBLE_VALUE_SUCCESS)
+		{
+			//Arrange
+			std::initializer_list<double> list{ 1.1, 5.1, 9.1 };
+			auto tree = new tree::BinaryTree<double>(list);
+			auto expected = true; // has value - true
+
+			//Act
+			auto actual = tree->has_value(5.1);
+
+			//Assert
+			Assert::AreEqual(expected, actual);
+			Assert::IsTrue(actual);
+		}
+		TEST_METHOD(ADD_DOUBLE_NODE_SUCCESS)
+		{
+			//Arrange
+			auto tree = new tree::BinaryTree<double>();
+			auto expected = true; // has value - true
+
+			//Act
+			auto added = tree->add_node(5.1);
+			auto actual = tree->has_value(5.1); // tested upper
+
+			//Assert
+			Assert::AreEqual(expected, actual);
+			Assert::IsTrue(added);
+		}
+
+		TEST_METHOD(REMOVE_DOUBLE_NODE_SUCCESS)
+		{
+			//Arrange
+			std::initializer_list<double> list{ 1.1, 5.1};
+			auto tree = new tree::BinaryTree<double>(list);
+			auto expected = false; // has value - false
+
+			//Act
+			auto remove = tree->remove_node(5.1);
+			auto actual = tree->has_value(5.1);
 
 			//Assert
 			Assert::AreEqual(expected, actual);
