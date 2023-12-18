@@ -20,8 +20,7 @@ namespace Nodetest
 			auto real_value = node->data;
 
 			//Assert
-			Assert::AreEqual(expected, real_value);
-			Assert::IsTrue(real_value);
+			Assert::IsTrue(real_value == expected);
 		}
 
 		TEST_METHOD(EQUEL_OPERATOR_NODE_SUCCESS)
@@ -29,15 +28,9 @@ namespace Nodetest
 			//Arrange
 			auto left_node = new tree::Node<int>(5);
 			auto right_node = new tree::Node<int>(4);
-			auto expected = false;
-
-			//Act
-			auto result = (left_node == right_node);
 
 			//Assert
-
-			Assert::IsTrue(result == expected);
-
+			Assert::IsFalse(left_node == right_node);
 		}
 
 		TEST_METHOD(NOT_EQUEL_OPERATOR_NODE_SUCCESS)
@@ -45,13 +38,11 @@ namespace Nodetest
 			//Arrange
 			auto left_node = new tree::Node<int>(5);
 			auto right_node = new tree::Node<int>(6);
-			auto expected = true;
 
 			//Act
 			auto result = (left_node != right_node);
 
 			//Assert
-			Assert::AreEqual(expected, result);
 			Assert::IsTrue(result);
 		}
 
@@ -60,13 +51,9 @@ namespace Nodetest
 			//Arrange
 			auto left_node = new tree::Node<int>(5);
 			auto right_node = new tree::Node<int>(60);
-			auto expected = true;
-
-			//Act
-			auto result = (left_node < right_node);
 
 			//Assert
-			Assert::IsTrue(result == expected);
+			Assert::IsTrue(left_node < right_node);
 		}
 
 		TEST_METHOD(GREATER_OPERATOR_NODE_SUCCESS)
@@ -74,13 +61,9 @@ namespace Nodetest
 			//Arrange
 			auto left_node = new tree::Node<int>(4);
 			auto right_node = new tree::Node<int>(6);
-			auto expected = false;
-
-			//Act
-			auto result = (left_node > right_node);
 
 			//Assert
-			Assert::IsTrue(result == expected);
+			Assert::IsFalse(left_node > right_node);
 		}
 	};
 }

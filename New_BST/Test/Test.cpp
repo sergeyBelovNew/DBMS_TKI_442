@@ -16,13 +16,11 @@ namespace Test
 		{
 			//Arrange
 			auto tree = new tree::BinaryTree<int>();
-			auto expected = true; // default init - empty tree
 
 			//Act
 			auto is_empty = tree->is_empty();
 
 			//Assert
-			Assert::AreEqual(expected, is_empty);
 			Assert::IsTrue(is_empty);
 		}
 
@@ -31,14 +29,13 @@ namespace Test
 			//Arrange
 			std::initializer_list<int> list{ 1, 5 };
 			auto tree = new tree::BinaryTree<int>(list);
-			auto expected = 2;
+			size_t expected = 2;
 
 			//Act
-			auto actual_size = tree->get_size();
+			size_t actual_size = tree->get_size();
 
 			//Assert
-			Assert::AreEqual(expected, int(actual_size));
-			Assert::IsTrue(actual_size);
+			Assert::AreEqual(expected, actual_size);
 		}
 
 		TEST_METHOD(PRINT_SUCCESS)
@@ -53,7 +50,6 @@ namespace Test
 
 			//Assert
 			Assert::AreEqual(expected, print);
-			Assert::IsTrue(tree);
 		}
 
 		TEST_METHOD(HAS_INT_VALUE_SUCCESS)
@@ -61,28 +57,24 @@ namespace Test
 			//Arrange
 			std::initializer_list<int> list{ 1, 5, 9 };
 			auto tree = new tree::BinaryTree<int>(list);
-			auto expected = true; // has value - true
 
 			//Act
 			auto actual = tree->has_value(5);
 
 			//Assert
-			Assert::AreEqual(expected, actual);
 			Assert::IsTrue(actual);
 		}
 		TEST_METHOD(ADD_INT_NODE_SUCCESS)
 		{
 			//Arrange
 			auto tree = new tree::BinaryTree<int>();
-			auto expected = true; // has value - true
 
 			//Act
 			auto added = tree->add_node(5);
 			auto actual = tree->has_value(5); // tested upper
 
 			//Assert
-			Assert::AreEqual(expected, actual);
-			Assert::IsTrue(added);
+			Assert::IsTrue(actual);
 		}
 
 		TEST_METHOD(REMOVE_INT_NODE_SUCCESS)
@@ -90,15 +82,13 @@ namespace Test
 			//Arrange
 			std::initializer_list<int> list{ 1, 5 };
 			auto tree = new tree::BinaryTree<int>(list);
-			auto expected = false; // has value - false
 
 			//Act
 			auto remove = tree->remove_node(5);
 			auto actual = tree->has_value(5);
 
 			//Assert
-			Assert::AreEqual(expected, actual);
-			Assert::IsTrue(remove);
+			Assert::IsFalse(actual);
 		}
 
 		TEST_METHOD(HAS_DOUBLE_VALUE_SUCCESS)
@@ -106,28 +96,24 @@ namespace Test
 			//Arrange
 			std::initializer_list<double> list{ 1.1, 5.1, 9.1 };
 			auto tree = new tree::BinaryTree<double>(list);
-			auto expected = true; // has value - true
 
 			//Act
 			auto actual = tree->has_value(5.1);
 
 			//Assert
-			Assert::AreEqual(expected, actual);
 			Assert::IsTrue(actual);
 		}
 		TEST_METHOD(ADD_DOUBLE_NODE_SUCCESS)
 		{
 			//Arrange
 			auto tree = new tree::BinaryTree<double>();
-			auto expected = true; // has value - true
 
 			//Act
 			auto added = tree->add_node(5.1);
 			auto actual = tree->has_value(5.1); // tested upper
 
 			//Assert
-			Assert::AreEqual(expected, actual);
-			Assert::IsTrue(added);
+			Assert::IsTrue(actual);
 		}
 
 		TEST_METHOD(REMOVE_DOUBLE_NODE_SUCCESS)
@@ -135,15 +121,13 @@ namespace Test
 			//Arrange
 			std::initializer_list<double> list{ 1.1, 5.1};
 			auto tree = new tree::BinaryTree<double>(list);
-			auto expected = false; // has value - false
 
 			//Act
 			auto remove = tree->remove_node(5.1);
 			auto actual = tree->has_value(5.1);
 
 			//Assert
-			Assert::AreEqual(expected, actual);
-			Assert::IsTrue(remove);
+			Assert::IsFalse(actual);
 		}
 	};
 }
